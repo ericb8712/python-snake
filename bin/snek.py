@@ -1,4 +1,4 @@
- ## This is a snake like game
+ # ## This is a snake like game
  ## it is called snek for dank reasons
  ## this was written by eric
  ## it wasn't actually written by eric, but rather by rocco Ciccone
@@ -6,6 +6,7 @@
 import pygame
 import time
 
+##spitzname
 from pygame import (init as init,
                     QUIT as pquit,
                     KEYDOWN as keydown,
@@ -26,12 +27,15 @@ from pygame.time import (Clock as clock)
 
 init()
 
+##Farbe
+
 blue = (0,0,255)
 red = (255,0,0)
 green = (0,255,0)
 white = (255,255,255)
 black = (0,0,0)
 
+##Fenster
 dis_width = 500
 dis_height = 450
 dis = set_mode((dis_width, dis_height))
@@ -52,6 +56,7 @@ clock = clock()
 
 font_style = font(None, 50)
 
+##Wo gameover schrift isch
 def message (msg, color):
     mesg = font_style.render (msg, True, color)
     dis.blit (mesg, [dis_width/4, dis_height/3])
@@ -59,7 +64,7 @@ def message (msg, color):
 
 
 
-
+##Stürige
 while not game_over:
 
         for event in get_event():
@@ -83,19 +88,20 @@ while not game_over:
                 elif event.key == k_down:
                     y1_change = snake_block
                     x1_change = 0
-
+        ##Wo er stirbt
         if x1 >= dis_width or x1 < 0 or y1 >= dis_height or y1 < 0:
             game_over = True
 
         x1 += x1_change
         y1 += y1_change
+        ##Schlangefarb und hintergrundfarb
         dis.fill(white)
         color(dis, blue, [x1, y1, snake_block, snake_block])
 
         update()
 
         clock.tick(snake_speed)
-
+##Nachricht wenn du stirbsch
 message("hesch verkackt", red)
 update()
 time.sleep(2)
