@@ -5,7 +5,6 @@
 
 import pygame
 import time
-import random
 
 from pygame import (init as init,
                     QUIT as pquit,
@@ -35,14 +34,21 @@ black = (0,0,0)
 
 dis_width = 500
 dis_height = 450
-
 dis = set_mode((dis_width, dis_height))
 set_caption("snek NOT snake")
 
-clock = clock()
+game_over = False
+
+x1 = dis_width/2
+y1 = dis_height/2
 
 snake_block = 10
 snake_speed = 25
+
+x1_change = 0
+y1_change = 0
+
+clock = clock()
 
 font_style = font(None, 50)
 
@@ -50,36 +56,11 @@ def message (msg, color):
     mesg = font_style.render (msg, True, color)
     dis.blit (mesg, [dis_width/4, dis_height/3])
 
-def gameLoop():
-    game_over = False
-    game_close = False
 
-x1 = dis_width/2
-y1 = dis_height/2
 
-x1_change = 0
-y1_change = 0
 
-foodx = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
-foody = round(random.randrange(0, dis_width - snake_block) / 10.0) * 10.0
 
 while not game_over:
-
-    while game_close == True:
-        dis.fill(white)
-        message("Du hesch verkackt! Druck Q zum leave oder C zum nomal spiele")
-        update()
-
-        for event in get_event():
-
-            if event.type == keydown:
-
-                if event.key == k_q:
-                    game_over = True
-                    game_close = False
-                
-                if event.key == k_c:
-                    gameLoop()
 
         for event in get_event():
             if event.type == pquit:
@@ -109,16 +90,15 @@ while not game_over:
         x1 += x1_change
         y1 += y1_change
         dis.fill(white)
-        color(dis, red, [foodx, foody, snake_block, snake_block])
         color(dis, blue, [x1, y1, snake_block, snake_block])
+
         update()
 
-        if x1 == foodx and y1 == foody:
-            print ("mmmhhhh läcka")
         clock.tick(snake_speed)
 
-    pquit()
-    quit()
+message("hesch verkackt", red)
+update()
+time.sleep(2)
 
-gameLoop()
-
+pquit()
+quit()
