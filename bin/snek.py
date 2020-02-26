@@ -8,7 +8,7 @@ import random
 
 pygame.init()
 
-##Speed
+##Speed high number = hard  low number = easy
 difficulty = 12
 
 # Window size
